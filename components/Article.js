@@ -85,6 +85,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'How Manually Manipulating the DOM Can Make You a Better Web Developer',
+    date: 'August 4, 2020',
+    firstParagraph: `Core competencies we've got to manage that low hanging fruit digital literacy. Value-added we need distributors to evangelize the new line to local markets. Form without content style without meaning. Baseline imagineer. Win-win-win back-end of third quarter and that ipo will be a game-changer nor pull in ten extra bodies to help roll the tortoise, and great plan! let me diarize this, and we can synchronise ourselves at a later timepoint yet pig in a python. Define the underlying principles that drive decisions and strategy for your design language. Value prop nail jelly to the hothouse wall, but no scraps hit the floor, so thinking outside the box, or are there any leftovers in the kitchen?. We've got to manage that low hanging fruit horsehead offer. Imagineer. Vec please advise soonest at the end of the day, and 360 degree content marketing pool so drop-dead date gain alignment or draw a line in the sand. Offline this discussion flesh that out re-inventing the wheel. Table the discussion let's not solutionize this right now parking lot it drink from the firehose those options are already baked in with this model. Punter churning anomalies yet circle back around timeframe technologically savvy yet who's the goto on this job with the way forward yet killing it. `,
+    secondParagraph: `Core competencies we've got to manage that low hanging fruit digital literacy. Value-added we need distributors to evangelize the new line to local markets. Form without content style without meaning. Baseline imagineer. Win-win-win back-end of third quarter and that ipo will be a game-changer nor pull in ten extra bodies to help roll the tortoise, and great plan! let me diarize this, and we can synchronise ourselves at a later timepoint yet pig in a python. Define the underlying principles that drive decisions and strategy for your design language. Value prop nail jelly to the hothouse wall, but no scraps hit the floor, so thinking outside the box, or are there any leftovers in the kitchen?. We've got to manage that low hanging fruit horsehead offer. Imagineer. Vec please advise soonest at the end of the day, and 360 degree content marketing pool so drop-dead date gain alignment or draw a line in the sand. Offline this discussion flesh that out re-inventing the wheel. Table the discussion let's not solutionize this right now parking lot it drink from the firehose those options are already baked in with this model. Punter churning anomalies yet circle back around timeframe technologically savvy yet who's the goto on this job with the way forward yet killing it. `,
+    thirdParagraph: `Core competencies we've got to manage that low hanging fruit digital literacy. Value-added we need distributors to evangelize the new line to local markets. Form without content style without meaning. Baseline imagineer. Win-win-win back-end of third quarter and that ipo will be a game-changer nor pull in ten extra bodies to help roll the tortoise, and great plan! let me diarize this, and we can synchronise ourselves at a later timepoint yet pig in a python. Define the underlying principles that drive decisions and strategy for your design language. Value prop nail jelly to the hothouse wall, but no scraps hit the floor, so thinking outside the box, or are there any leftovers in the kitchen?. We've got to manage that low hanging fruit horsehead offer. Imagineer. Vec please advise soonest at the end of the day, and 360 degree content marketing pool so drop-dead date gain alignment or draw a line in the sand. Offline this discussion flesh that out re-inventing the wheel. Table the discussion let's not solutionize this right now parking lot it drink from the firehose those options are already baked in with this model. Punter churning anomalies yet circle back around timeframe technologically savvy yet who's the goto on this job with the way forward yet killing it. `
   }
 ];
 
@@ -111,3 +118,39 @@ const data = [
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 */
+
+function articleMaker(article) {
+  let theArticle = document.createElement('div');
+  theArticle.className = 'article';
+  
+  let title = document.createElement('h2');
+  title.textContent = article.title;
+
+  let date = document.createElement('p');
+  date.className = 'date';
+  date.textContent = article.date;
+
+  let paragraphs = [document.createElement('p'), document.createElement('p'), document.createElement('p')];
+  paragraphs[0].textContent = article.firstParagraph;
+  paragraphs[1].textContent = article.secondParagraph;
+  paragraphs[2].textContent = article.thirdParagraph;
+
+  let button = document.createElement('span');
+  button.className = 'expandButton';
+  button.textContent = '+';
+  button.addEventListener('click', event => {
+    theArticle.classList.toggle('article-open');
+  });
+
+  let elements = [title, date, ...paragraphs, button];
+  elements.forEach(el => {
+    theArticle.appendChild(el);
+  });
+
+  return theArticle;
+};
+
+let articlesDiv = document.querySelector('div.articles');
+data.forEach(article => {
+  articlesDiv.appendChild(articleMaker(article));
+});
