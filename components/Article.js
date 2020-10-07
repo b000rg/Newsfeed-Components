@@ -86,6 +86,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Software Piracy in the Roaring \'20s',
+    date: 'Oct 6th, 2020',
+    firstParagraph: `Code of conduct scuttle topgallant galleon long clothes belaying pin coxswain to go on account Blimey clap of thunder. Hempen halter warp scuppers matey gangway pillage lass grapple schooner wench. Yo-ho-ho lanyard lateen sail rope's end salmagundi interloper shrouds boatswain avast fore.`,
+    secondParagraph: `Me Letter of Marque snow crack Jennys tea cup Admiral of the Black line barque pirate reef sails fire ship. Lad jury mast gibbet yo-ho-ho hulk black spot overhaul reef Blimey black jack. Handsomely sheet crimp log bounty stern gangplank prow scurvy square-rigged.`,
+    thirdParagraph: `Weigh anchor Sink me Pieces of Eight Privateer lee reef barkadeer topsail run a rig bring a spring upon her cable. Fire ship crow's nest wench holystone chantey lateen sail bring a spring upon her cable bilge lanyard maroon. Careen list wench topsail grog cog parley Sea Legs rope's end belay.`
   }
 ];
 
@@ -114,3 +121,41 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+let articleMaker = article => {
+  let div = document.createElement('div');
+  let title = document.createElement('h2');
+  let date = document.createElement('p');
+  let paragraphs = [];
+  let expandButton = document.createElement('span');
+
+  div.classList.add('article');
+  date.classList.add('date');
+  expandButton.classList.add('expandButton');
+
+  title.innerText = article.title;
+  date.innerText = article.date;
+  expandButton.innerText = '+';
+  for (ordinal of ['first', 'second', 'third']) {
+    let p = document.createElement('p');
+    p.innerText = article[ordinal + 'Paragraph'];
+    paragraphs.push(p);
+  };
+
+  expandButton.addEventListener('click', e => {
+    div.classList.toggle('article-open');
+  });
+
+  div.appendChild(title);
+  div.appendChild(date);
+  for (p of paragraphs) {
+    div.appendChild(p);
+  };
+  div.appendChild(expandButton);
+
+  return div;
+};
+
+data.forEach(article => {
+  document.querySelector('div.articles').appendChild(articleMaker(article));
+});
